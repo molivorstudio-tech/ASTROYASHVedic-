@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0B0E1A;
+  --foreground: #F1F5F9;
+  --card: #121628;
+  --card-foreground: #F1F5F9;
+  --popover: #151B32;
+  --popover-foreground: #F1F5F9;
+  --primary: #9966CC;
+  --primary-hover: #B380D9;
+  --primary-foreground: #0B0E1A;
+  --secondary: #1E2746;
+  --secondary-foreground: #E2E8F0;
+  --muted: #161D35;
+  --muted-foreground: #94A3B8;
+  --accent: #263159;
+  --accent-foreground: #FDE047;
+  --border: rgba(153, 102, 204, 0.2);
+  --input: #1C2442;
+  --ring: #9966CC;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cormorant), Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Amethyst Editorial Button Classes */
+.btn-editorial-primary {
+  background-color: #9966CC !important;
+  color: #0B0E1A !important;
+  border: 1px solid #7A4FA6 !important;
+  box-shadow: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-editorial-primary:hover {
+  background-color: #B380D9 !important;
+  border-color: #9966CC !important;
+  color: #0B0E1A !important;
+  box-shadow: none !important;
+}
+
+.btn-editorial-outline {
+  background-color: rgba(11, 14, 26, 0.5) !important;
+  color: #B380D9 !important;
+  border: 1px solid rgba(153, 102, 204, 0.5) !important;
+  box-shadow: none !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-editorial-outline:hover {
+  background-color: #9966CC !important;
+  color: #0B0E1A !important;
+  border-color: #9966CC !important;
+  box-shadow: none !important;
+}
+
+.amethyst-gradient-text {
+  background: linear-gradient(135deg, #FAF5FF 0%, #D5B7EE 35%, #9966CC 70%, #B380D9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-panel {
+  background: rgba(18, 22, 40, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(153, 102, 204, 0.2);
+  box-shadow: 
+    0 15px 35px -10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-nav {
+  background: rgba(11, 14, 26, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(153, 102, 204, 0.2);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 0 rgba(153, 102, 204, 0.1);
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0E1A;
+}
+::-webkit-scrollbar-thumb {
+  background: #1C2442;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9966CC;
+}

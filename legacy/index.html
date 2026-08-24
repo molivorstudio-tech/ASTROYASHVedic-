@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Astroyash</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- stylesheet -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link href="assets/css/font.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/js/plugin/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/js/plugin/select2/select2.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/js/plugin/airdatepicker/datepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div class="as_loader">
+        <img src="assets/images/loader.png" alt="" class="img-responsive">
+    </div> 
+    <div class="as_main_wrapper">
+        <section class="as_header_wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <div class="as_logo">
+                            <a href="index.html">
+                                <img src="assets/images/logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-6">
+                        <div class="as_right_info">
+                            <div class="as_menu_wrapper">
+                                <span class="as_toggle">
+                                    <img src="assets/images/svg/menu.svg" alt="">
+                                </span>
+                                <div class="as_menu">
+                                    <ul>
+                                        <li><a href="index.html" class="active">home</a></li>
+                                        <li><a href="about.html">about us</a></li>
+                                        <li><a href="pricing.html">Consultation Call</a></li>
+                                        <li><a href="contact.html">contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+        <section class="as_banner_wrapper">
+            <div class="container">
+                <div class="container1">
+                <div class="row as_verticle_center">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="as_banner_slider">
+                            <div class="as_banner_detail">
+                                <h5>Struggling with life's challenges ?</h5>
+                                <h1>Get personalised Solutions <br> for your problems today</h1>
+                                <p>Secure an appointment now and make a brighter future with our expert guidance.</p>
+                                <a href="pricing.html" class="as_btn">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="as_banner_img text-center">
+                            <img src="assets/images/hand_bg.png" alt="" class="img-responsive as_hand_bg">
+                            <img src="assets/images/hand.png" alt="" class="img-responsive as_hand">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section> 
+       
+        <section class="as_horoscope_wrapper as_padderBottom80 as_padderTop80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <h1 class="as_heading">Horoscope Forecasts</h1>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="15" viewBox="0 0 240 15">
+                            <image id="Vector_Smart_Object" data-name="Vector Smart Object" width="240" height="15" xlink:href="data:img/png;base64,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"/>
+                          </svg>
+                          </span>
+                        <p class="as_font14 as_padderTop20 as_padderBottom20">Explore your zodiac sign and uncover what the stars have in store for you.</p>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign"> 
+                                <img src="assets/images/svg/horoscope/h1.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Aries</h5>
+                                    <p>March 21 - April 19</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h2.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Taurus</h5>
+                                    <p>April 20 - May 20 </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h3.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Gemini</h5>
+                                    <p>May 21 - June 20</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h4.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Cancer</h5>
+                                    <p>June 21 - July 22</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h5.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Leo</h5>
+                                    <p>July 23 - August 22</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h6.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Virgo</h5>
+                                    <p>August 23 - September 22</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h7.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Libra</h5>
+                                    <p>September 23 - October 22</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h8.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Scorpio</h5>
+                                    <p>October 23 - November 21</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h9.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Sagittairus</h5>
+                                    <p>November 22 - December 21</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h10.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Capricorn</h5>
+                                    <p>December 22 - January 19</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h11.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Aquarius</h5>
+                                    <p>January 20 - February 18</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-4 col-xs-6">
+                        <div class="as_sign_box text-center">
+                            
+                                <span class="as_sign">
+                                <img src="assets/images/svg/horoscope/h12.svg" alt="">
+                                </span>
+                                <div>
+                                    <h5>Pisces</h5>
+                                    <p>February 19 - March 20</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="as_know_sign_wrapper as_padderBottom50 as_padderTop100">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h1 class="as_heading1 as_heading_center">Zodiac Sign Finder</h1>
+                            </div>   
+                            <div class="col-lg-8">
+                                <div class="as_sign_form text-left">
+                                    <ul> 
+                                        <li class="as_form_box">
+                                            <div class="as_input_feild as_select_box">
+                                                <select id="daySelect" class="form-control" data-placeholder="Date">
+                                                    <option value="Day">Day</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                    <option value="25">25</option>
+                                                    <option value="26">26</option>
+                                                    <option value="27">27</option>
+                                                    <option value="28">28</option>
+                                                    <option value="29">29</option>
+                                                    <option value="30">30</option>
+                                                    <option value="31">31</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                        <li class="as_form_box">
+                                            <div class="as_input_feild as_select_box">
+                                                <select id="monthSelect" class="form-control" data-placeholder="Month">
+                                                    <option value="Month">Month</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                        <li class="as_form_box">
+                                            <div class="as_input_feild as_select_box">
+                                                <select id="yearSelect" class="form-control" data-placeholder="Year">
+                                                    <option value="Year">Year</option>
+                                                    <option value="1965">1965</option>
+                                                    <option value="1966">1966</option>
+                                                    <option value="1967">1967</option>
+                                                    <option value="1968">1968</option>
+                                                    <option value="1969">1969</option>
+                                                    <option value="1970">1970</option>
+                                                    <option value="1971">1971</option>
+                                                    <option value="1972">1972</option>
+                                                    <option value="1973">1973</option>
+                                                    <option value="1974">1974</option>
+                                                    <option value="1975">1975</option>
+                                                    <option value="1976">1976</option>
+                                                    <option value="1977">1977</option>
+                                                    <option value="1978">1978</option>
+                                                    <option value="1979">1979</option>
+                                                    <option value="1980">1980</option>
+                                                    <option value="1981">1981</option>
+                                                    <option value="1982">1982</option>
+                                                    <option value="1983">1983</option>
+                                                    <option value="1984">1984</option>
+                                                    <option value="1985">1985</option>
+                                                    <option value="1986">1986</option>
+                                                    <option value="1987">1987</option>
+                                                    <option value="1988">1988</option>
+                                                    <option value="1989">1989</option>
+                                                    <option value="1990">1990</option>
+                                                    <option value="1991">1991</option>
+                                                    <option value="1992">1992</option>
+                                                    <option value="1993">1993</option>
+                                                    <option value="1994">1994</option>
+                                                    <option value="1995">1995</option>
+                                                    <option value="1996">1996</option>
+                                                    <option value="1997">1997</option>
+                                                    <option value="1998">1998</option>
+                                                    <option value="1999">1999</option>
+                                                    <option value="2000">2000</option>
+                                                    <option value="2001">2001</option>
+                                                    <option value="2002">2002</option>
+                                                    <option value="2003">2003</option>
+                                                    <option value="2004">2004</option>
+                                                    <option value="2005">2005</option>
+                                                    <option value="2006">2006</option>
+                                                    <option value="2007">2007</option>
+                                                    <option value="2008">2008</option>
+                                                    <option value="2009">2009</option>
+                                                    <option value="2010">2010</option>
+                                                    <option value="2011">2011</option>
+                                                    <option value="2012">2012</option>
+                                                    <option value="2013">2013</option>
+                                                    <option value="2014">2014</option>
+                                                    <option value="2015">2015</option>
+                                                    <option value="2016">2016</option>
+                                                    <option value="2017">2017</option>
+                                                    <option value="2018">2018</option>
+                                                    <option value="2019">2019</option>
+                                                    <option value="2020">2020</option>
+                                                    <option value="2021">2021</option>
+                                                    <option value="2022">2022</option>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2024">2024</option>
+                                                </select>
+                                            </div>
+                                        </li>
+                                        
+                                        
+                                        <li class="as_form_box">
+                                            <a href="javascript:;" id="submitBtn" class="as_btn">Submit</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="as_whychoose_wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 text-center">
+                        <h1 class="as_heading">Why Choose Us</h1>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="15" viewBox="0 0 240 15"> <image id="Design" width="240" height="15" xlink:href="data:img/png;base64,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"/> </svg>
+                          </span>  
+                        <p class="as_font14 as_padderTop20 as_padderBottom50">At Astroyash, we're dedicated to your journey. With over 25 years of experience,Astro Yash Singh provides personalized guidance <br>to navigate life's challenges. Trust us for clarity in your career, relationships, and personal growth<br> Join countless others who've found direction and fulfillment through our expertise<br> Choose us to unlock your path to success and happiness</p>
+                    </div>
+                    <div class="col-lg-12">
+                        <ul class="as_choose_ul">
+                            <li>
+                                <div class="as_whychoose_box text-center">
+                                    <span class="as_number"><span><span data-from="0" data-to="25"
+                                        data-speed="5000">25</span>+</span><img src="assets/images/svg/choose.svg" alt=""></span>
+                                    <h4>Years of Experience</h4>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="as_whychoose_box text-center">
+                                    <span class="as_number"><span><span data-from="0" data-to="10000"
+                                        data-speed="5000">10000</span>+</span><img src="assets/images/svg/choose.svg" alt=""></span>
+                                    <h4>Trusted by Thousands of Clients</h4>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="as_whychoose_box text-center">
+                                    <span class="as_number"><span><span data-from="0" data-to="10"
+                                        data-speed="5000">10</span>+</span><img src="assets/images/svg/choose.svg" alt=""></span>
+                                    <h4>Years of Legacy</h4>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="as_customer_wrapper as_padderBottom80 as_padderTop80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h1 class="as_heading as_heading_center">What Our Client Say</h1>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="15" viewBox="0 0 240 15">
+                            <image id="Vector_Smart_Object" data-name="Vector Smart Object" width="240" height="15" xlink:href="data:img/png;base64,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"/>
+                          </svg>
+                          </span><p class="as_font14 as_padderBottom50 as_padderTop20">  <br>  </p>
+                        
+
+                        <div class="row as_customer_slider">
+                            <div class="col-lg-5 col-md-5 as_customer_nav">
+                                <div class="as_customer_img">
+                                    <img src="assets/images/c1.jpeg" alt="" class="img-responsive">
+                                </div>
+                                <div class="as_customer_img">
+                                    <img src="assets/images/c2.jpeg" alt="" class="img-responsive">
+                                </div>
+                                <div class="as_customer_img">
+                                    <img src="assets/images/c3.jpeg" alt="" class="img-responsive">
+                                </div>
+                                <div class="as_customer_img">
+                                    <img src="assets/images/c4.jpeg" alt="" class="img-responsive">
+                                </div>
+                                <div class="as_customer_img">
+                                    <img src="assets/images/c5.jpeg" alt="" class="img-responsive">
+                                </div>
+                                <div class="as_customer_img">
+                                    <img src="assets/images/c6.jpeg" alt="" class="img-responsive">
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7 as_customer_for">
+                                <div class="as_customer_box text-center">
+                                    <p class="as_margin0">"Consulting with Guruji has been amazing! As a doctor, staying healthy is crucial, and their advice truly made a difference. They also helped me understand and navigate my son's marriage plans and other issues with ease. I'm so thankful for their advice and caring support!"</p>
+                                    <h3>Renu Bhagat - <span>Doctor</span></h3>
+                                </div>
+                                <div class="as_customer_box text-center">
+                                    <p class="as_margin0">"Working with Astroyash was a game-changer for me! Not only did they offer fantastic advice for my property business, but they also provided invaluable insights into my personal relationships and other life challenges. Their guidance has truly made a positive difference. I'm thoroughly impressed and grateful for their expertise!"</p>
+                                    <h3>Damul Sharma - <span>Property Dealer</span></h3>
+                                </div>
+                                <div class="as_customer_box text-center">
+                                    <p class="as_margin0">"Consulting Yash ji was a blessing. Their advice on my wife's health and our hospital's business strategy was spot-on, bringing us much-needed clarity. They even provided invaluable insights into our daughter's education. I'm deeply grateful for their genuine care and expertise. Highly recommend him for anyone seeking meaningful guidance in life's complexities."</p>
+                                    <h3>Dinesh Chandra - <span>Doctor</span></h3>
+                                </div>
+                                <div class="as_customer_box text-center">
+                                    <p class="as_margin0">"Choosing Astroyash was the best decision I made! Their career advice landed me a dream job in no time, and their support made all the difference in my personal life too. Thanks to their genuine guidance, I'm not only excelling in my career but also enjoying a fulfilling and successful marriage."</p>
+                                    <h3>Nishant Pundir - <span>Software Developer</span></h3>
+                                </div>
+                                <div class="as_customer_box text-center">
+                                    <p class="as_margin0">"Finding direction seemed impossible until I met Yash ji. Their guidance not only clarified my career path but also helped me overcome obstacles. Their support for my mental health was invaluable. Now, I'm genuinely happy and on the right track. I can't thank them enough for their impactful help!"</p>
+                                    <h3>Shagun Som - <span>Student</span></h3>
+                                </div>
+                                <div class="as_customer_box text-center">
+                                    <p class="as_margin0">"Meeting Yash sir changed everything! They guided me through life's chaos, advising a career change and steps for a better future. Now, I'm excelling in my job and enjoying a blissful marriage. Thanks to their genuine help, I'm living life to the fullest. Grateful beyond words for their life-changing advice!"</p>
+                                    <h3>Shivani Tomer - <span>Lecturer</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+         
+        <section class="as_footer_wrapper as_padderTop80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="as_footer_inner as_padderTop10 as_padderBottom40">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="as_footer_widget">
+                                        <div class="as_footer_logo">
+                                            <a href="index.html"><img src="assets/images/logo1.png" alt=""></a>
+                                        </div>
+                                        <p>Thanks for visiting us.</p>
+
+                                        <ul class="as_contact_list">
+                                            <li>
+                                                <img src="assets/images/svg/map.svg" alt="">
+                                                <p>Meerut, UP, India</p>
+                                            </li>
+                                            <li>
+                                                <img src="assets/images/svg/phone.svg" alt="">
+                                                <p>
+                                                    <a href="javascript:;">+(91) 78188-69443</a>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <img src="assets/images/svg/mail.svg" alt="">
+                                                <p>
+                                                    <a href="javascript:;">ajeetsingh@astroyash.com</a>
+                                                </p> 
+                                            </li> 
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="as_footer_widget">
+                                    <h3 class="as_footer_heading">Quick Links</h3>
+
+                                    <ul>
+                                        <li><a href="about.html"> About Us</a></li>
+                                        <li><a href="contact.html"> Contact Us</a></li>
+                                    </ul>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="as_footer_widget">
+                                    <h3 class="as_footer_heading">Horoscope Forecasts</h3>
+                                    <ul>
+                                        <li> My Daily Horoscope</li>
+                                        <li> My Weekly Horoscope</li>
+                                        <li> My Monthly Horoscope</li>
+                                        <li> My Love Horoscope</li>
+                                        <li> My Career Horoscope</li>
+                                    </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="as_footer_widget">
+                                                    <img src="assets/images/poster.png" alt="">
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+
+                        <div class="as_copyright_wrapper text-center">
+                            <p> Astroyash&copy; 2024. All Right Reserved.</p>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+    <!-- javascript -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/plugin/slick/slick.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugin/select2/select2.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugin/countto/jquery.countTo.js"></script>
+    <script type="text/javascript" src="assets/js/plugin/airdatepicker/datepicker.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugin/airdatepicker/i18n/datepicker.en.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script src="zodiacfinder.js"></script>   
+</body>
+</html>

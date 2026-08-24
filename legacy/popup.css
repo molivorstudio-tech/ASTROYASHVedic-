@@ -1,0 +1,136 @@
+/* Styles for modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: linear-gradient(to bottom right, #efb155ee, #db601e);
+    padding: 11px;
+    border: 0px solid #000000;
+    border-radius: 10px;
+    width: 80%; /* Adjust width for laptops */
+    max-width: 310px; /* Max width for mobile */
+    text-align: center;
+    position: relative; 
+    color: white;
+    font-family: "Philosopher", sans-serif;
+    margin: 20% auto; /* Default margin for centering */
+}
+
+/* Button styles */
+.as_btn {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 27px;
+    font-family: "Philosopher", sans-serif;
+}
+
+.modal-buttons button {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  /* Define button hover styles */
+  .modal-buttons button:hover {
+    background-color: #800909;
+    color: #ffffff;
+  }
+
+.close {
+    color: #f2f2f2;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content button {
+    margin: 5px;
+    padding: 9px;
+    border-radius: 27px; 
+    font-size: 14px;
+    border: 0px solid #000000;
+}
+
+
+.modal-content .modal-buttons {
+    display: inline-block;
+}
+.elementor-icon-list-items {
+    list-style-type: none;
+    padding-left: 0px;
+}
+.elementor-icon-list-icon i:hover {
+    color: #800909; /* Change this to the desired color */
+}
+.as_banner_img .as_poster{
+    max-width: 70%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding box shadow */
+}
+.increased_size {
+    width: 100%; /* Adjust this value as needed */
+    height: 381px; /* Adjust this value as needed */
+    margin-bottom: 50px;
+    margin-top: -10px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 991px) {
+    .as_banner_img.text-center {
+        margin-top: 20px; /* Adjust margin as needed */
+    }
+    .as_banner_img.text-center img.as_poster {
+        width: 20%; /* Make the image responsive */
+        max-width: 20%; /* Ensure image doesn't exceed container width */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
+
+
+/* Media queries for responsive design */
+@media (max-width: 767px) {
+    .as_banner_img {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .modal-content {
+        width: 40%; /* Adjust width for larger screens */
+        margin: 18% auto; /* Adjust margin for centering */
+    }
+}
+
+
