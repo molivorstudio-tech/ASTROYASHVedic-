@@ -3,7 +3,9 @@ import Link from "next/link";
 import { Sparkles, Clock, Calendar, ArrowUpRight, BookOpen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { BLOG_POSTS } from "@/lib/blog-data";
+import { getAllPosts } from "@/lib/sanity.client";
+
+export const revalidate = 60; // ISR revalidation window in seconds
 
 export const metadata = {
   title: "Blog & Astrological Insights | Astroyash",
@@ -12,10 +14,12 @@ export const metadata = {
 
 const CATEGORIES = ["All", "Horoscopes", "Vedic Astrology", "Relationships", "Career"];
 
-export default function BlogIndexPage() {
+export default async function BlogIndexPage() {
+  const posts = await getAllPosts();
+
   return (
     <div className="py-12 md:py-20 space-y-16 md:space-y-24 relative z-10">
-      {/* 1. Header Section (Simpler page-header pattern matching About page) */}
+      {/* 1. Header Section */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-6">
           <Badge variant="default" className="gap-2 py-1.5 px-4">
@@ -33,7 +37,7 @@ export default function BlogIndexPage() {
         </div>
       </section>
 
-      {/* 2. Category Filter Row (Visual/Static Pills) */}
+      {/* 2. Category Filter Row */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center flex-wrap gap-3">
           {CATEGORIES.map((cat, idx) => (
@@ -48,10 +52,10 @@ export default function BlogIndexPage() {
         </div>
       </section>
 
-      {/* 3. Post Grid (6 Cards) */}
+      {/* 3. Post Grid */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {BLOG_POSTS.map((post) => (
+          {posts.map((post) => (
             <Card
               key={post.slug}
               className="flex flex-col justify-between overflow-hidden group hover:border-amethyst-500/50 transition-all duration-300"
@@ -59,7 +63,7 @@ export default function BlogIndexPage() {
               <div>
                 {/* Cover Image Placeholder with CSS Gradient & Cosmic Styling */}
                 <div
-                  className={`h-48 w-full bg-gradient-to-br ${post.gradient} relative flex items-center justify-center p-6 border-b border-cosmic-800/80 overflow-hidden`}
+                  className={`h-48 w-full bg-gradient-to-br ${post.gradient || "from-amethyst-600/40 via-cosmic-800/60 to-cosmic-950"} relative flex items-center justify-center p-6 border-b border-cosmic-800/80 overflow-hidden`}
                 >
                   <div className="absolute inset-0 bg-cosmic-950/30 backdrop-blur-[2px]" />
                   <div className="relative z-10 text-center space-y-2">

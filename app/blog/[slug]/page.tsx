@@ -5,7 +5,10 @@ import { ArrowLeft, Calendar, Clock, User, Quote, ArrowUpRight, Sparkles, BookOp
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getPostBySlug, getRelatedPosts, BLOG_POSTS } from "@/lib/blog-data";
+import { getPostBySlug, getRelatedPosts, getAllPosts } from "@/lib/sanity.client";
+import { PortableTextRenderer } from "@/components/blog/PortableTextRenderer";
+
+export const revalidate = 60; // ISR revalidation window in seconds
 
 interface PostPageProps {
   params: Promise<{
@@ -14,14 +17,15 @@ interface PostPageProps {
 }
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export async function generateMetadata({ params }: PostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: "Post Not Found | Astroyash" };
 
   return {
@@ -32,13 +36,13 @@ export async function generateMetadata({ params }: PostPageProps) {
 
 export default async function BlogPostPage({ params }: PostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post.slug, 3);
+  const relatedPosts = await getRelatedPosts(post.slug, 3);
 
   return (
     <div className="py-10 md:py-16 space-y-16 md:space-y-24 relative z-10">
@@ -81,9 +85,12 @@ export default async function BlogPostPage({ params }: PostPageProps) {
 
       {/* 2. Article Content Body */}
       <section className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-8 text-slate-300 text-base sm:text-lg leading-relaxed font-sans">
-        {post.content.slice(0, 2).map((paragraph, idx) => (
-          <p key={idx}>{paragraph}</p>
-        ))}
+        {/* Render PortableText body if rawBody exists, otherwise fallback array */}
+        {post.rawBody ? (
+          <PortableTextRenderer value={post.rawBody} />
+        ) : (
+          post.content.map((paragraph: string, idx: number) => <p key={idx}>{paragraph}</p>)
+        )}
 
         {/* Mid-Article Pull-Quote */}
         {post.quote && (
@@ -97,10 +104,6 @@ export default async function BlogPostPage({ params }: PostPageProps) {
             </span>
           </div>
         )}
-
-        {post.content.slice(2).map((paragraph, idx) => (
-          <p key={idx}>{paragraph}</p>
-        ))}
       </section>
 
       {/* 3. Closing CTA Strip */}
@@ -159,7 +162,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
               >
                 <div>
                   <div
-                    className={`h-36 w-full bg-gradient-to-br ${relPost.gradient} relative flex items-center justify-center p-4 border-b border-cosmic-800/80`}
+                    className={`h-36 w-full bg-gradient-to-br ${relPost.gradient || "from-amethyst-600/40 via-cosmic-800/60 to-cosmic-950"} relative flex items-center justify-center p-4 border-b border-cosmic-800/80`}
                   >
                     <Badge variant="default" className="text-xs bg-cosmic-950/80 backdrop-blur-md">
                       {relPost.category}
