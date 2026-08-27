@@ -1,7 +1,6 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import { projectId, dataset, apiVersion, useCdn } from "../sanity/env";
-import { BLOG_POSTS, BlogPost as FallbackBlogPost } from "./blog-data";
 
 export const client = createClient({
   projectId,
@@ -16,26 +15,25 @@ export function urlFor(source: any) {
   return builder.image(source);
 }
 
-export interface SanityPost {
-  _id: string;
+export interface SanityBlogPost {
+  slug: string;
   title: string;
-  slug: { current: string };
   category: "Horoscopes" | "Vedic Astrology" | "Relationships" | "Career";
-  publishedAt: string;
-  readTime?: string;
+  date: string;
+  readTime: string;
   excerpt: string;
+  author: string;
   gradient?: string;
-  author?: { name: string };
-  pullQuote?: { text: string; author: string };
-  body?: any;
+  content: string[];
+  rawBody?: any;
+  quote?: {
+    text: string;
+    author: string;
+  };
 }
 
-export async function getAllPosts(): Promise<FallbackBlogPost[]> {
+export async function getAllPosts(): Promise<SanityBlogPost[]> {
   try {
-    if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
-      return BLOG_POSTS;
-    }
-
     const query = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc) {
       _id,
       title,
@@ -51,15 +49,15 @@ export async function getAllPosts(): Promise<FallbackBlogPost[]> {
     }`;
 
     const sanityPosts = await client.fetch(query);
-    if (!sanityPosts || sanityPosts.length === 0) {
-      return BLOG_POSTS;
-    }
+    if (!sanityPosts || sanityPosts.length === 0) return [];
 
     return sanityPosts.map((p: any) => ({
       slug: p.slug,
       title: p.title,
       category: p.category || "Vedic Astrology",
-      date: p.date ? new Date(p.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "Aug 2026",
+      date: p.date
+        ? new Date(p.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+        : "Aug 2026",
       readTime: p.readTime || "5 min read",
       excerpt: p.excerpt,
       author: p.author || "Yash Singh",
@@ -69,17 +67,13 @@ export async function getAllPosts(): Promise<FallbackBlogPost[]> {
       quote: p.pullQuote,
     }));
   } catch (error) {
-    console.warn("Sanity fetch warning, using fallback dataset:", error);
-    return BLOG_POSTS;
+    console.error("Error fetching posts from Sanity:", error);
+    return [];
   }
 }
 
-export async function getPostBySlug(slug: string): Promise<any | undefined> {
+export async function getPostBySlug(slug: string): Promise<SanityBlogPost | undefined> {
   try {
-    if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
-      return BLOG_POSTS.find((p) => p.slug === slug);
-    }
-
     const query = `*[_type == "post" && slug.current == $slug][0] {
       _id,
       title,
@@ -95,15 +89,15 @@ export async function getPostBySlug(slug: string): Promise<any | undefined> {
     }`;
 
     const p = await client.fetch(query, { slug });
-    if (!p) {
-      return BLOG_POSTS.find((post) => post.slug === slug);
-    }
+    if (!p) return undefined;
 
     return {
       slug: p.slug,
       title: p.title,
       category: p.category || "Vedic Astrology",
-      date: p.date ? new Date(p.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "Aug 2026",
+      date: p.date
+        ? new Date(p.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+        : "Aug 2026",
       readTime: p.readTime || "5 min read",
       excerpt: p.excerpt,
       author: p.author || "Yash Singh",
@@ -113,11 +107,12 @@ export async function getPostBySlug(slug: string): Promise<any | undefined> {
       quote: p.pullQuote,
     };
   } catch (error) {
-    return BLOG_POSTS.find((post) => post.slug === slug);
+    console.error(`Error fetching post by slug (${slug}) from Sanity:`, error);
+    return undefined;
   }
 }
 
-export async function getRelatedPosts(currentSlug: string, count: number = 3): Promise<FallbackBlogPost[]> {
+export async function getRelatedPosts(currentSlug: string, count: number = 3): Promise<SanityBlogPost[]> {
   const allPosts = await getAllPosts();
   return allPosts.filter((p) => p.slug !== currentSlug).slice(0, count);
 }
