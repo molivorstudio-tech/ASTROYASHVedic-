@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Sparkles, Compass, User, Menu, X, Calendar } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
+import { Sparkles, Compass, User, Menu, X, Calendar, LogOut, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
@@ -16,15 +17,16 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { data: session, status } = useSession();
+
+  const isAuthenticated = status === "authenticated";
+  const user = session?.user;
 
   return (
     <header className="sticky top-0 z-50 w-full glass-nav transition-all duration-300">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-20">
-        {/* Brand Logo - Directly on navbar background */}
-        <Link
-          href="/"
-          className="flex items-center gap-3.5 group"
-        >
+        {/* Brand Logo */}
+        <Link href="/" className="flex items-center gap-3.5 group">
           <div className="relative flex items-center justify-center w-10 h-10 rounded-full border border-amethyst-500/50 bg-amethyst-500/15 text-amethyst-300 shadow-amethyst-glow group-hover:scale-105 group-hover:border-amethyst-400 transition-all duration-300">
             <Compass className="w-5 h-5 group-hover:rotate-45 transition-transform duration-500 text-amethyst-300" />
             <Sparkles className="w-3.5 h-3.5 absolute -top-1 -right-1 text-amethyst-200 animate-twinkle" />
@@ -51,20 +53,62 @@ export function Navbar() {
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-amethyst-400 to-amethyst-600 group-hover:w-3/4 transition-all duration-300 rounded-full" />
             </Link>
           ))}
+
+          {/* Admin Studio Link if Admin */}
+          {user?.isAdmin && (
+            <Link
+              href="/studio"
+              className="px-3.5 py-2 text-sm font-semibold text-amethyst-400 hover:text-amethyst-200 transition-colors flex items-center gap-1.5"
+            >
+              <ShieldCheck className="w-4 h-4" />
+              <span>CMS Admin</span>
+            </Link>
+          )}
         </nav>
 
         {/* Desktop Actions */}
         <div className="hidden md:flex items-center gap-3.5">
-          <Link href="/account" aria-label="Client Account Portal">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-slate-300 hover:text-amethyst-300 border border-transparent hover:border-amethyst-500/30 hover:bg-amethyst-500/10 rounded-lg"
-              title="Account Portal"
-            >
-              <User className="w-5 h-5" />
-            </Button>
-          </Link>
+          {isAuthenticated ? (
+            <div className="flex items-center gap-3">
+              <Link href="/account">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="gap-2 border-amethyst-500/30 text-slate-200 hover:text-amethyst-300"
+                >
+                  <User className="w-4 h-4 text-amethyst-400" />
+                  <span className="max-w-[120px] truncate">{user?.name || "Account"}</span>
+                </Button>
+              </Link>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="text-slate-400 hover:text-red-300 hover:bg-red-500/10 gap-1.5 px-2.5"
+                title="Sign out"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Log out</span>
+              </Button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link href="/login">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-slate-300 hover:text-amethyst-300 hover:bg-amethyst-500/10 font-semibold"
+                >
+                  Log in
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button variant="outline" size="sm" className="border-amethyst-500/40 text-amethyst-300">
+                  Sign up
+                </Button>
+              </Link>
+            </div>
+          )}
 
           <Link href="/book">
             <Button variant="default" size="default" className="gap-2.5">
@@ -76,9 +120,9 @@ export function Navbar() {
 
         {/* Mobile Hamburger Toggle */}
         <div className="flex items-center gap-2 md:hidden">
-          <Link href="/account" aria-label="Account">
+          <Link href={isAuthenticated ? "/account" : "/login"} aria-label="Account">
             <Button variant="ghost" size="icon" className="text-slate-300 h-9 w-9">
-              <User className="w-5 h-5" />
+              <User className="w-5 h-5 text-amethyst-300" />
             </Button>
           </Link>
           <button
@@ -107,7 +151,41 @@ export function Navbar() {
             ))}
           </nav>
           <div className="pt-3 border-t border-cosmic-700/60 flex flex-col gap-2.5">
-            <Link href="/book" onClick={() => setMobileMenuOpen(false)} className="w-full">
+            {isAuthenticated ? (
+              <>
+                <Link href="/account" onClick={() => setMobileMenuOpen(false)} className="w-full">
+                  <Button variant="outline" className="w-full justify-center gap-2">
+                    <User className="w-4 h-4 text-amethyst-400" />
+                    <span>My Account ({user?.name})</span>
+                  </Button>
+                </Link>
+                <Button
+                  variant="ghost"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    signOut({ callbackUrl: "/" });
+                  }}
+                  className="w-full justify-center gap-2 text-red-400 hover:bg-red-500/10"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Log out</span>
+                </Button>
+              </>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full">
+                    Log in
+                  </Button>
+                </Link>
+                <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="default" className="w-full">
+                    Sign up
+                  </Button>
+                </Link>
+              </div>
+            )}
+            <Link href="/book" onClick={() => setMobileMenuOpen(false)} className="w-full pt-1">
               <Button variant="default" className="w-full justify-center gap-2">
                 <Calendar className="w-4 h-4 text-cosmic-950" />
                 <span>Book a reading</span>

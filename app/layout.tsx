@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CosmicBackground } from "@/components/layout/CosmicBackground";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -33,10 +34,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${jakarta.variable} dark`}>
       <body className="bg-cosmic-950 text-foreground antialiased min-h-screen flex flex-col relative selection:bg-gold-400/30 selection:text-gold-200">
-        <CosmicBackground />
-        <Navbar />
-        <main className="flex-1 relative z-10">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <CosmicBackground />
+          <Navbar />
+          <main className="flex-1 relative z-10">{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
