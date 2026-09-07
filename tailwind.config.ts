@@ -49,6 +49,20 @@ const config: Config = {
           dark: "#7A4FA6",
           glow: "rgba(153, 102, 204, 0.25)",
         },
+        // Vedic / traditional palette — aged brass & ivory
+        brass: {
+          200: "#EDD98A",
+          300: "#DEC263",
+          400: "#C9A84C", // primary brass accent
+          500: "#B8922E",
+          600: "#9A7820",
+        },
+        ivory: {
+          50: "#FDFAF3",
+          100: "#F7F1E0",
+          200: "#EDE3C8",
+        },
+
         secondary: {
           DEFAULT: "var(--secondary)",
           foreground: "var(--secondary-foreground)",

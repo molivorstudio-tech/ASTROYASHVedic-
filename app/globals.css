@@ -84,6 +84,51 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Brass / Vedic gradient for hero headline accent */
+.brass-gradient-text {
+  background: linear-gradient(135deg, #EDD98A 0%, #C9A84C 45%, #B8922E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Ivory warm white for hero headline */
+.text-ivory-100 {
+  color: #F7F1E0;
+}
+
+/* Hero section fade-in — respects prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-section .hero-text-col {
+    animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hero-section .photo-container {
+    animation: heroFadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  }
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Kundli outer ring slow rotation — prefers-reduced-motion gated */
+@media (prefers-reduced-motion: no-preference) {
+  .kundli-rotate {
+    transform-origin: 450px 450px;
+    animation: kundliSpin 120s linear infinite;
+  }
+}
+
+@keyframes kundliSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 .glass-panel {
   background: rgba(18, 22, 40, 0.65);
   backdrop-filter: blur(16px);
