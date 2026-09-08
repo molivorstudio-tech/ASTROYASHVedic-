@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/home/HeroSection";
 import { MeetYashSection } from "@/components/home/MeetYashSection";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
+import { KundliExplorerSection } from "@/components/home/KundliExplorerSection";
 import { FeaturedServicesSection } from "@/components/home/FeaturedServicesSection";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 
@@ -10,6 +11,7 @@ export default function HomePage() {
       <HeroSection />
       <MeetYashSection />
       <HowItWorksSection />
+      <KundliExplorerSection />
       <FeaturedServicesSection />
       <TestimonialsSection />
     </div>
