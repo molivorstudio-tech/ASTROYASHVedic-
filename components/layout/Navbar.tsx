@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Sparkles, Compass, User, Menu, X, Calendar, LogOut, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
   const { data: session, status } = useSession();
 
   const isAuthenticated = status === "authenticated";
@@ -47,10 +49,15 @@ export function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="px-3.5 py-2 text-sm font-semibold text-slate-300 hover:text-amethyst-300 transition-colors relative group"
+              aria-current={pathname === link.href ? "page" : undefined}
+              className={`px-3.5 py-2 text-sm font-semibold transition-colors relative group ${
+                pathname === link.href ? "text-amethyst-200" : "text-slate-300 hover:text-amethyst-300"
+              }`}
             >
               {link.name}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-amethyst-400 to-amethyst-600 group-hover:w-3/4 transition-all duration-300 rounded-full" />
+              <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-amethyst-400 to-amethyst-600 transition-all duration-300 rounded-full ${
+                pathname === link.href ? "w-3/4" : "w-0 group-hover:w-3/4"
+              }`} />
             </Link>
           ))}
 
@@ -144,7 +151,12 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2.5 rounded-lg text-base font-semibold text-slate-200 hover:bg-amethyst-500/12 hover:text-amethyst-300 transition-colors"
+                aria-current={pathname === link.href ? "page" : undefined}
+                className={`px-4 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  pathname === link.href
+                    ? "bg-amethyst-500/15 text-amethyst-200"
+                    : "text-slate-200 hover:bg-amethyst-500/12 hover:text-amethyst-300"
+                }`}
               >
                 {link.name}
               </Link>

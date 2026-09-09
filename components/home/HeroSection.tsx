@@ -14,14 +14,14 @@ function Stat({
   label: string;
 }) {
   return (
-    <div className="flex flex-col items-center gap-1 px-6 first:pl-0 last:pr-0">
+    <div className="flex flex-col items-center gap-1 px-1 sm:px-6 sm:first:pl-0 sm:last:pr-0">
       <div className="flex items-center gap-2">
         <Icon className="w-4 h-4 text-brass-400 shrink-0" aria-hidden="true" />
-        <span className="font-serif text-2xl md:text-3xl font-bold text-ivory-100 leading-none">
+        <span className="font-serif text-lg sm:text-2xl md:text-3xl font-bold text-ivory-100 leading-none whitespace-nowrap">
           {value}
         </span>
       </div>
-      <span className="text-xs text-slate-400 tracking-wide font-sans uppercase">
+      <span className="text-[10px] sm:text-xs text-slate-300 tracking-wide font-sans uppercase leading-tight">
         {label}
       </span>
     </div>
@@ -49,7 +49,7 @@ export function HeroSection() {
       />
 
       {/* Content — centered, text-first */}
-      <div className="relative z-10 mx-auto max-w-4xl w-full px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center hero-text-col space-y-7">
+      <div className="hero-content-surface relative isolate z-10 mx-auto max-w-4xl w-full px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center hero-text-col space-y-5 sm:space-y-7">
 
         {/* Eyebrow */}
         <div className="inline-flex items-center gap-2.5 border border-brass-500/40 rounded px-4 py-1.5">
@@ -60,14 +60,14 @@ export function HeroSection() {
         </div>
 
         {/* Headline */}
-        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-ivory-100 leading-[1.07]">
+        <h1 className="font-serif text-3xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-ivory-100 leading-[1.07]">
           Unlock the{" "}
           <span className="brass-gradient-text">Cosmic Blueprint</span>
           {" "}of Your Destiny
         </h1>
 
         {/* Subheadline */}
-        <p className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-2xl font-sans leading-relaxed font-normal">
+        <p className="text-base sm:text-xl md:text-2xl text-slate-200 max-w-2xl font-sans leading-relaxed font-normal">
           Gain profound clarity on career transitions, relationship dynamics,
           and life timing through precision natal chart analysis and planetary
           transit forecasts.
@@ -90,7 +90,7 @@ export function HeroSection() {
         </div>
 
         {/* Stat bar — bare columns, brass dividers, no glass */}
-        <div className="w-full pt-6 mt-2 border-t border-brass-500/20 flex flex-col sm:flex-row items-center justify-center divide-y sm:divide-y-0 sm:divide-x divide-brass-500/20 gap-4 sm:gap-0">
+        <div className="w-full pt-5 mt-1 border-t border-brass-500/20 grid grid-cols-3 sm:flex items-start sm:items-center justify-center sm:divide-x divide-brass-500/20 gap-2 sm:gap-0">
           <Stat icon={Users} value="10,000+" label="Charts analyzed" />
           <Stat icon={Award} value="12+ Years" label="Vedic experience" />
           <Stat icon={Star}  value="4.9 / 5"  label="Client satisfaction" />

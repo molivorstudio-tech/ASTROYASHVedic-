@@ -149,6 +149,29 @@
     inset 0 -1px 0 rgba(153, 102, 204, 0.1);
 }
 
+@media (max-width: 639px) {
+  .hero-section {
+    min-height: 0;
+  }
+
+  .hero-section .hero-content-surface {
+    padding-top: 3.5rem;
+    padding-bottom: 2.5rem;
+    text-shadow: 0 1px 18px rgba(11, 14, 26, 0.9);
+  }
+
+  .hero-section .hero-content-surface::before {
+    content: "";
+    position: absolute;
+    inset: 1.5rem 0;
+    z-index: -1;
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 1rem;
+    background: linear-gradient(180deg, rgba(11, 14, 26, 0.72), rgba(11, 14, 26, 0.9));
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.32);
+  }
+}
+
 /* Custom subtle scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
